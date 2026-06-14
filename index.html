@@ -1,40 +1,1668 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Daniel ❤️ Tatiana Deluxe</title>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Daniel ❤️ Tatiana</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-body{margin:0;font-family:Arial,sans-serif;color:#fff;background:linear-gradient(#101530,#6a4a88,#ff9fc6);overflow:hidden}
-.screen{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px 24px 120px;overflow:auto}
-.active{display:flex}
-h1{font-size:clamp(2.2rem,8vw,4rem)} .card{max-width:850px;background:rgba(255,255,255,.08);padding:24px;border-radius:24px;backdrop-filter:blur(6px)}
-button{padding:14px 24px;border:none;border-radius:999px;margin-top:20px}
-#stars div{position:fixed;width:2px;height:2px;background:white;border-radius:50%}
-.progress{position:fixed;bottom:0;left:0;height:6px;background:white;width:0}
-#letter{cursor:pointer}
-.heart{position:fixed;bottom:-20px}
-</style></head>
-<body>
-<audio id="music" controls style="position:fixed;top:10px;right:10px;z-index:99"><source src="algo-contigo.mp3"></audio>
-<div id="stars"></div><div class="progress" id="p"></div>
 
-<section class="screen active"><h1>Daniel ❤️ Tatiana</h1><div class="card">Una historia que empezó en una cafetería y sigue escribiéndose cada día.</div><button onclick="next()">Comenzar</button></section>
-<section class="screen"><div class="card"><h2>☕ La Cafetería</h2><p>9 de abril de 2024. Ella fregaba platos. Yo no sabía que estaba mirando a mi futuro.</p></div><button onclick="next()">Continuar</button></section>
-<section class="screen"><div class="card"><h2>😏 El amigo</h2><p>Un amigo decidió invitaros. Parecía un plan cualquiera. No lo era.</p></div><button onclick="next()">Continuar</button></section>
-<section class="screen"><div class="card"><h2>💬 La excusa perfecta</h2><p>Tatiana pidió mi número. Y el resto acabó convirtiéndose en nuestra historia.</p></div><button onclick="next()">Continuar</button></section>
-<section class="screen"><div class="card"><h2>❤️ Nuestra fecha</h2><p id="days"></p></div><button onclick="next()">Continuar</button></section>
-<section class="screen"><div class="card"><h2>💍 Cuenta atrás</h2><p id="boda"></p></div><button onclick="next()">Continuar</button></section>
-<section class="screen"><div class="card" id="letter"><h2>💌 Toca para abrir la carta</h2></div><button onclick="next()">Continuar</button></section>
-<section class="screen"><h1>¿Quieres seguir escribiendo esta historia conmigo?</h1><button onclick="finale()">❤️ Sí</button><button onclick="finale()">❤️ Siempre</button></section>
-
-<script>
-for(let i=0;i<180;i++){let d=document.createElement('div');d.style.left=Math.random()*100+'vw';d.style.top=Math.random()*100+'vh';document.getElementById('stars').appendChild(d)}
-let idx=0,s=[...document.querySelectorAll('.screen')];
-function next(){s[idx].classList.remove('active');idx++;s[idx].classList.add('active');document.getElementById('p').style.width=(idx/(s.length-1))*100+'%'}
-const start=new Date('2024-04-21');
-days.innerHTML='Han pasado '+Math.floor((Date.now()-start)/(86400000))+' días desde el comienzo de nuestra historia ❤️';
-const w=new Date('2026-08-21');
-boda.innerHTML='Faltan '+Math.ceil((w-Date.now())/86400000)+' días para nuestra boda 💍';
-letter.onclick=()=>letter.innerHTML='<h2>💌 Carta para Tatiana</h2><p>Volvería a elegir cada mirada, cada conversación y cada día contigo. Gracias por convertir una casualidad en un hogar. Te amo. — Daniel ❤️</p>';
-function finale(){
-document.body.innerHTML='<div style="height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center;background:linear-gradient(#101530,#6a4a88,#ff9fc6)"><h1>Tatiana ❤️ Daniel</h1><h2>Desde 21/04/2024 hasta siempre</h2></div>';
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
-</script></body></html>
+
+html{
+height:100%;
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+background:linear-gradient(
+180deg,
+#0c1028 0%,
+#261f4d 40%,
+#ff93b7 100%
+);
+
+color:white;
+
+overflow:hidden;
+
+height:100vh;
+
+}
+
+#stars{
+
+position:fixed;
+inset:0;
+z-index:0;
+pointer-events:none;
+
+}
+
+.star{
+
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+animation:twinkle 4s infinite;
+
+}
+
+@keyframes twinkle{
+
+50%{
+opacity:.2;
+}
+
+}
+
+.shooting-star{
+
+position:absolute;
+width:120px;
+height:2px;
+background:linear-gradient(
+90deg,
+white,
+transparent
+);
+
+transform:rotate(-35deg);
+
+animation:shoot 7s linear infinite;
+
+opacity:.8;
+
+}
+
+@keyframes shoot{
+
+0%{
+top:-10%;
+left:-20%;
+}
+
+100%{
+top:120%;
+left:120%;
+}
+
+}
+
+.progress-container{
+
+position:fixed;
+bottom:0;
+left:0;
+
+width:100%;
+height:7px;
+
+background:rgba(255,255,255,.1);
+
+z-index:50;
+
+}
+
+.progress{
+
+height:100%;
+width:0%;
+
+background:white;
+
+transition:1s;
+
+}
+
+.chapter-counter{
+
+position:fixed;
+top:20px;
+left:20px;
+
+z-index:40;
+
+background:rgba(255,255,255,.1);
+
+padding:10px 18px;
+
+border-radius:30px;
+
+backdrop-filter:blur(8px);
+
+font-size:.9rem;
+
+}
+
+.music-btn{
+
+position:fixed;
+
+top:20px;
+right:20px;
+
+z-index:50;
+
+background:white;
+
+color:#ff4f92;
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:50px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+
+}
+
+.screen{
+
+position:absolute;
+
+inset:0;
+
+display:none;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding:
+
+40px
+20px
+140px
+20px;
+
+overflow-y:auto;
+
+-webkit-overflow-scrolling:touch;
+
+z-index:5;
+
+}
+
+.screen.active{
+
+display:flex;
+
+animation:fade 1s ease;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+h1{
+
+font-family:'Dancing Script',cursive;
+
+font-size:clamp(
+3rem,
+9vw,
+5rem
+);
+
+margin-bottom:20px;
+
+}
+
+h2{
+
+font-size:clamp(
+1.5rem,
+5vw,
+2.5rem
+);
+
+margin-bottom:20px;
+
+}
+
+p{
+
+max-width:800px;
+
+font-size:clamp(
+1rem,
+4vw,
+1.3rem
+);
+
+line-height:1.9;
+
+}
+
+.card{
+
+background:rgba(255,255,255,.1);
+
+backdrop-filter:blur(12px);
+
+padding:30px;
+
+border-radius:25px;
+
+max-width:850px;
+
+box-shadow:
+0 10px 40px rgba(0,0,0,.2);
+
+}
+
+.btn{
+
+margin-top:35px;
+
+border:none;
+
+padding:16px 30px;
+
+border-radius:50px;
+
+background:white;
+
+color:#ff4f92;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+transform:scale(1.05);
+
+}
+
+.quote{
+
+margin-top:20px;
+
+font-style:italic;
+
+opacity:.8;
+
+}
+
+.heart-center{
+
+font-size:90px;
+
+animation:heartbeat 1.5s infinite;
+
+}
+
+@keyframes heartbeat{
+
+0%{
+transform:scale(1);
+}
+
+25%{
+transform:scale(1.1);
+}
+
+50%{
+transform:scale(1);
+}
+
+75%{
+transform:scale(1.15);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.chat{
+
+width:100%;
+max-width:650px;
+
+margin-top:20px;
+
+}
+
+.message{
+
+padding:14px 18px;
+
+border-radius:18px;
+
+margin:10px 0;
+
+max-width:80%;
+
+}
+
+.left{
+
+background:rgba(255,255,255,.15);
+
+margin-right:auto;
+
+text-align:left;
+
+}
+
+.right{
+
+background:#ff4f92;
+
+margin-left:auto;
+
+text-align:left;
+
+}
+
+.envelope{
+
+width:220px;
+height:140px;
+
+background:white;
+
+position:relative;
+
+cursor:pointer;
+
+border-radius:8px;
+
+margin-top:20px;
+
+}
+
+.envelope:before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+clip-path:polygon(
+0 0,
+50% 50%,
+100% 0
+);
+
+background:#f5f5f5;
+
+}
+
+.letter{
+
+display:none;
+
+margin-top:25px;
+
+}
+
+.letter.show{
+
+display:block;
+
+animation:fade 1s;
+
+}
+
+.days-counter{
+
+font-size:2rem;
+
+font-weight:bold;
+
+margin-top:20px;
+
+}
+
+.wedding-counter{
+
+font-size:2rem;
+
+font-weight:bold;
+
+margin-top:20px;
+
+color:#ffe4f0;
+
+}
+
+.final-buttons{
+
+display:flex;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.heart{
+
+position:fixed;
+
+font-size:24px;
+
+pointer-events:none;
+
+animation:float 6s linear forwards;
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:
+translateY(0)
+scale(1);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:
+translateY(-100vh)
+scale(1.8);
+
+opacity:0;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.music-btn{
+
+top:15px;
+right:15px;
+
+font-size:.9rem;
+
+}
+
+.chapter-counter{
+
+font-size:.8rem;
+
+left:10px;
+
+}
+
+.btn{
+
+width:90%;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<audio id="music" loop>
+
+<source src="algo-contigo.mp3" type="audio/mpeg">
+
+</audio>
+
+<div id="stars"></div>
+
+<div class="shooting-star"></div>
+
+<div class="chapter-counter">
+❤️ Capítulo <span id="chapterNumber">1</span>/10
+</div>
+
+<button
+class="music-btn"
+onclick="toggleMusic()">
+🎵 Música
+</button>
+
+<div class="progress-container">
+<div
+class="progress"
+id="progress">
+</div>
+</div>
+<div class="progress-container">
+<div
+class="progress"
+id="progress">
+</div>
+</div>
+<!-- PANTALLA INICIAL -->
+
+<section class="screen active">
+
+<div class="heart-center">
+❤️
+</div>
+
+<h1>
+Daniel & Tatiana
+</h1>
+
+<div class="card">
+
+<p>
+
+Algunas historias empiezan por casualidad.
+
+<br><br>
+
+Otras parecen escritas por el destino.
+
+<br><br>
+
+Y luego está la nuestra.
+
+</p>
+
+<p class="quote">
+
+"Mi coincidencia favorita."
+
+</p>
+
+</div>
+
+<button
+class="btn"
+onclick="nextChapter()">
+
+Comenzar nuestra historia ❤️
+
+</button>
+
+</section>
+
+<!-- CAPÍTULO 1 -->
+
+<section class="screen">
+
+<h2>
+☕ Capítulo I
+</h2>
+
+<h1>
+La Cafetería
+</h1>
+
+<div class="card">
+
+<p>
+
+9 de abril de 2024.
+
+<br><br>
+
+Era un día cualquiera.
+
+<br><br>
+
+Ella fregaba platos en una cafetería.
+
+<br><br>
+
+Yo todavía no lo sabía...
+
+<br><br>
+
+pero estaba a punto de conocer a la mujer de mi vida.
+
+</p>
+
+</div>
+
+<button class="btn"
+onclick="nextChapter()">
+
+Continuar
+
+</button>
+
+</section>
+
+<!-- CAPÍTULO 2 -->
+
+<section class="screen">
+
+<h2>
+😏 Capítulo II
+</h2>
+
+<h1>
+El Amigo
+</h1>
+
+<div class="card">
+
+<p>
+
+Un amigo que trabajaba con ella tuvo una idea.
+
+<br><br>
+
+— ¿Por qué no os venís después del trabajo?
+
+<br><br>
+
+Y así...
+
+<br><br>
+
+sin importancia aparente,
+
+<br><br>
+
+comenzó todo.
+
+</p>
+
+</div>
+
+<button class="btn"
+onclick="nextChapter()">
+
+Continuar
+
+</button>
+
+</section>
+
+<!-- CAPÍTULO 3 -->
+
+<section class="screen">
+
+<h2>
+💬 Capítulo III
+</h2>
+
+<h1>
+La Excusa Perfecta
+</h1>
+
+<div class="chat">
+
+<div class="message left">
+
+Tatiana:
+Oye...
+
+</div>
+
+<div class="message left">
+
+¿Me das tu número?
+
+</div>
+
+<div class="message right">
+
+Claro 😂
+
+</div>
+
+<div class="message right">
+
+¿Para qué?
+
+</div>
+
+<div class="message left">
+
+Quería conseguir marihuana 😭😂
+
+</div>
+
+</div>
+
+<div class="card"
+style="margin-top:20px;">
+
+<p>
+
+Y la mejor historia de mi vida...
+
+<br><br>
+
+empezó gracias a la peor excusa posible.
+
+</p>
+
+</div>
+
+<button class="btn"
+onclick="nextChapter()">
+
+Continuar
+
+</button>
+
+</section>
+
+<!-- CAPÍTULO 4 -->
+
+<section class="screen">
+
+<h2>
+❤️ Capítulo IV
+</h2>
+
+<h1>
+Cada vez más cerca
+</h1>
+
+<div class="card">
+
+<p>
+
+Empezamos a quedar.
+
+<br><br>
+
+Una vez.
+
+<br>
+
+Luego otra.
+
+<br>
+
+Y otra más.
+
+<br><br>
+
+Luego perdí la cuenta.
+
+<br><br>
+
+Porque ya no importaban los planes.
+
+<br><br>
+
+Lo importante era verla.
+
+</p>
+
+</div>
+
+<button class="btn"
+onclick="nextChapter()">
+
+Continuar
+
+</button>
+
+</section>
+
+<!-- CAPÍTULO 5 -->
+
+<section class="screen">
+
+<h2>
+📅 Capítulo V
+</h2>
+
+<h1>
+Nuestra Fecha
+</h1>
+
+<div class="card">
+
+<p>
+
+21 / 04 / 2024
+
+</p>
+
+<div
+class="days-counter"
+id="daysCounter">
+
+0
+
+</div>
+
+<p>
+
+Desde ese día comenzó oficialmente nuestra historia ❤️
+
+</p>
+
+</div>
+
+<button class="btn"
+onclick="nextChapter()">
+
+Continuar
+
+</button>
+
+</section>
+
+<!-- CAPÍTULO 6 -->
+
+<section class="screen">
+
+<h2>
+✨ Capítulo VI
+</h2>
+
+<h1>
+Lo que encontré en ti
+</h1>
+
+<div class="card">
+
+<p>
+
+Encontré calma.
+
+<br><br>
+
+Encontré refugio.
+
+<br><br>
+
+Encontré risas.
+
+<br><br>
+
+Encontré hogar.
+
+<br><br>
+
+Y sin buscarlo...
+
+<br><br>
+
+te encontré a ti.
+
+</p>
+
+</div>
+
+<button class="btn"
+onclick="nextChapter()">
+
+Continuar
+
+</button>
+
+</section>
+
+<!-- CAPÍTULO 7 -->
+
+<section class="screen">
+
+<h2>
+💍 Capítulo VII
+</h2>
+
+<h1>
+Nuestra Boda
+</h1>
+
+<div class="card">
+
+<p>
+
+21 de agosto de 2026
+
+</p>
+
+<div
+class="wedding-counter"
+id="weddingCounter">
+
+0
+
+</div>
+
+<p>
+
+Falta menos para decir:
+
+<br><br>
+
+"Sí, quiero."
+
+</p>
+
+</div>
+
+<button class="btn"
+onclick="nextChapter()">
+
+Continuar
+
+</button>
+
+</section>
+</section>
+  <!-- CAPÍTULO 8 -->
+
+<section class="screen">
+
+<h2>
+🌹 Capítulo VIII
+</h2>
+
+<h1>
+Mi Casualidad Favorita
+</h1>
+
+<div class="card">
+
+<p>
+
+Hay personas que pasan por nuestra vida.
+
+<br><br>
+
+Y hay personas que cambian nuestra vida.
+
+<br><br>
+
+Tú hiciste ambas cosas.
+
+<br><br>
+
+Llegaste cuando menos lo esperaba.
+
+<br><br>
+
+Y te convertiste en el lugar donde siempre quiero volver.
+
+</p>
+
+</div>
+
+<button
+class="btn"
+onclick="nextChapter()">
+
+Continuar
+
+</button>
+
+</section>
+
+<!-- CAPÍTULO 9 -->
+
+<section class="screen">
+
+<h2>
+💌 Capítulo IX
+</h2>
+
+<h1>
+Una Carta Para Ti
+</h1>
+
+<div
+class="envelope"
+onclick="openLetter()">
+</div>
+
+<div
+id="letter"
+class="letter">
+
+<div class="card">
+
+<p>
+
+Tatiana...
+
+<br><br>
+
+Si pudiera volver al 9 de abril de 2024...
+
+<br><br>
+
+volvería a sentarme aquel día.
+
+<br><br>
+
+Volvería a mirar hacia aquella cafetería.
+
+<br><br>
+
+Volvería a responder cada mensaje.
+
+<br><br>
+
+Volvería a reírme de cada tontería.
+
+<br><br>
+
+Volvería a elegirte.
+
+<br><br>
+
+Una y otra vez.
+
+<br><br>
+
+Porque entre todas las casualidades de mi vida...
+
+<br><br>
+
+tú fuiste mi favorita.
+
+<br><br>
+
+Gracias por todo.
+
+<br><br>
+
+Gracias por quedarte.
+
+<br><br>
+
+Gracias por ser tú.
+
+<br><br>
+
+Te amo ❤️
+
+<br><br>
+
+— Daniel
+
+</p>
+
+</div>
+
+</div>
+
+<button
+class="btn"
+onclick="nextChapter()">
+
+Continuar
+
+</button>
+
+</section>
+
+<!-- CAPÍTULO 10 -->
+
+<section class="screen">
+
+<h2>
+✨ Último Capítulo
+</h2>
+
+<h1>
+El Futuro
+</h1>
+
+<div class="card">
+
+<p>
+
+Hoy tengo 18.
+
+<br><br>
+
+Tú tienes 19.
+
+<br><br>
+
+Y aun así...
+
+<br><br>
+
+cuando pienso en el futuro...
+
+<br><br>
+
+siempre apareces tú.
+
+<br><br>
+
+No sé exactamente qué nos espera.
+
+<br><br>
+
+Pero sí sé con quién quiero descubrirlo.
+
+<br><br>
+
+Contigo.
+
+</p>
+
+</div>
+
+<button
+class="btn"
+onclick="nextChapter()">
+
+Final ❤️
+
+</button>
+
+</section>
+
+<!-- PANTALLA FINAL -->
+
+<section class="screen">
+
+<div class="heart-center">
+
+❤️
+
+</div>
+
+<h1>
+
+¿Quieres seguir escribiendo esta historia conmigo?
+
+</h1>
+
+<div class="final-buttons">
+
+<button
+class="btn"
+onclick="loveEnding()">
+
+❤️ Sí
+
+</button>
+
+<button
+class="btn"
+onclick="loveEnding()">
+
+❤️ Siempre
+
+</button>
+
+</div>
+
+<p
+class="quote">
+
+No importa cuál elijas.
+
+<br>
+
+Las dos respuestas son correctas.
+
+</p>
+
+</section>
+<script>
+
+const screens =
+document.querySelectorAll(".screen");
+
+const progress =
+document.getElementById("progress");
+
+const chapterNumber =
+document.getElementById("chapterNumber");
+
+let current = 0;
+
+function nextChapter(){
+
+screens[current]
+.classList
+.remove("active");
+
+current++;
+
+if(
+current < screens.length
+){
+
+screens[current]
+.classList
+.add("active");
+
+}
+
+updateProgress();
+
+}
+
+function updateProgress(){
+
+const total =
+screens.length - 1;
+
+const percent =
+(current / total) * 100;
+
+progress.style.width =
+percent + "%";
+
+let chapter =
+current + 1;
+
+if(
+chapter > 10
+){
+chapter = 10;
+}
+
+chapterNumber.textContent =
+chapter;
+
+}
+
+function toggleMusic(){
+
+const music =
+document.getElementById("music");
+
+if(
+music.paused
+){
+
+music.play();
+
+}else{
+
+music.pause();
+
+}
+
+}
+
+function openLetter(){
+
+document
+.getElementById("letter")
+.classList
+.add("show");
+
+}
+function loveEnding(){
+
+for(
+let i=0;
+i<150;
+i++
+){
+
+setTimeout(()=>{
+
+const heart =
+document.createElement("div");
+
+heart.className =
+"heart";
+
+heart.innerHTML =
+"❤️";
+
+heart.style.left =
+Math.random()*100 + "vw";
+
+heart.style.bottom =
+"-50px";
+
+heart.style.fontSize =
+(Math.random()*20+20)+"px";
+
+document.body
+.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},6000);
+
+},i*60);
+
+}
+
+setTimeout(()=>{
+
+document.body.innerHTML =
+
+`
+
+<div
+style="
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+text-align:center;
+
+padding:30px;
+
+background:
+
+linear-gradient(
+180deg,
+#0c1028,
+#261f4d,
+#ff93b7
+);
+
+color:white;
+
+font-family:Poppins,sans-serif;
+
+">
+
+<h1
+style="
+
+font-family:
+'Dancing Script',
+cursive;
+
+font-size:
+clamp(
+4rem,
+12vw,
+7rem
+);
+
+">
+
+Tatiana ❤️ Daniel
+
+</h1>
+
+<p
+style="
+
+font-size:
+clamp(
+1.1rem,
+4vw,
+1.6rem
+);
+
+max-width:800px;
+
+line-height:2;
+
+">
+
+Desde aquel
+9 de abril de 2024...
+
+<br><br>
+
+hasta el resto de nuestras vidas.
+
+<br><br>
+
+Gracias por ser mi mejor casualidad.
+
+<br><br>
+
+Te amo.
+
+</p>
+
+<h2
+style="margin-top:40px;">
+
+∞
+
+</h2>
+
+</div>
+
+`;
+
+},5000);
+
+}
+
+const startDate =
+new Date(
+"2024-04-21"
+);
+
+const today =
+new Date();
+
+const daysTogether =
+Math.floor(
+
+(
+today -
+startDate
+)
+
+/
+
+(
+1000*
+60*
+60*
+24
+)
+
+);
+
+document
+.getElementById(
+"daysCounter"
+)
+.innerHTML =
+
+daysTogether +
+" días ❤️";
+
+const weddingDate =
+new Date(
+"2026-08-21"
+);
+
+const weddingDays =
+Math.ceil(
+
+(
+weddingDate -
+today
+)
+
+/
+
+(
+1000*
+60*
+60*
+24
+)
+
+);
+
+document
+.getElementById(
+"weddingCounter"
+)
+.innerHTML =
+
+weddingDays +
+" días 💍";
+
+const starsContainer =
+document
+.getElementById(
+"stars"
+);
+
+for(
+let i=0;
+i<200;
+i++
+){
+
+const star =
+document.createElement(
+"div"
+);
+
+star.className =
+"star";
+
+star.style.left =
+Math.random()*100 + "%";
+
+star.style.top =
+Math.random()*100 + "%";
+
+star.style.animationDelay =
+Math.random()*4 + "s";
+
+starsContainer
+.appendChild(
+star
+);
+
+}
+
+const romanticQuotes = [
+
+"Todo empezó en una cafetería ☕",
+
+"Mi coincidencia favorita ❤️",
+
+"Contigo siempre 🌙",
+
+"Nuestro mejor capítulo aún no ha llegado ✨",
+
+"Volvería a elegirte mil veces 💌",
+
+"Te encontré sin buscarte 🌹"
+
+];
+
+const randomQuote =
+
+romanticQuotes[
+Math.floor(
+Math.random() *
+romanticQuotes.length
+)
+];
+
+const quoteElement =
+document.createElement(
+"div"
+);
+
+quoteElement.style.position =
+"fixed";
+
+quoteElement.style.bottom =
+"20px";
+
+quoteElement.style.right =
+"20px";
+
+quoteElement.style.padding =
+"10px 15px";
+
+quoteElement.style.borderRadius =
+"20px";
+
+quoteElement.style.background =
+"rgba(255,255,255,.1)";
+
+quoteElement.style.backdropFilter =
+"blur(10px)";
+
+quoteElement.style.fontSize =
+".9rem";
+
+quoteElement.style.zIndex =
+"30";
+
+quoteElement.innerHTML =
+randomQuote;
+
+document.body
+.appendChild(
+quoteElement
+);
+
+updateProgress();
+
+</script>
+
+</body>
+
+</html>
