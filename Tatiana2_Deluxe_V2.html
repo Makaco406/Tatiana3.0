@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daniel ❤️ Tatiana Deluxe</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;color:#fff;background:linear-gradient(#101530,#6a4a88,#ff9fc6);overflow:hidden}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px 24px 120px;overflow:auto}
+.active{display:flex}
+h1{font-size:clamp(2.2rem,8vw,4rem)} .card{max-width:850px;background:rgba(255,255,255,.08);padding:24px;border-radius:24px;backdrop-filter:blur(6px)}
+button{padding:14px 24px;border:none;border-radius:999px;margin-top:20px}
+#stars div{position:fixed;width:2px;height:2px;background:white;border-radius:50%}
+.progress{position:fixed;bottom:0;left:0;height:6px;background:white;width:0}
+#letter{cursor:pointer}
+.heart{position:fixed;bottom:-20px}
+</style></head>
+<body>
+<audio id="music" controls style="position:fixed;top:10px;right:10px;z-index:99"><source src="algo-contigo.mp3"></audio>
+<div id="stars"></div><div class="progress" id="p"></div>
+
+<section class="screen active"><h1>Daniel ❤️ Tatiana</h1><div class="card">Una historia que empezó en una cafetería y sigue escribiéndose cada día.</div><button onclick="next()">Comenzar</button></section>
+<section class="screen"><div class="card"><h2>☕ La Cafetería</h2><p>9 de abril de 2024. Ella fregaba platos. Yo no sabía que estaba mirando a mi futuro.</p></div><button onclick="next()">Continuar</button></section>
+<section class="screen"><div class="card"><h2>😏 El amigo</h2><p>Un amigo decidió invitaros. Parecía un plan cualquiera. No lo era.</p></div><button onclick="next()">Continuar</button></section>
+<section class="screen"><div class="card"><h2>💬 La excusa perfecta</h2><p>Tatiana pidió mi número. Y el resto acabó convirtiéndose en nuestra historia.</p></div><button onclick="next()">Continuar</button></section>
+<section class="screen"><div class="card"><h2>❤️ Nuestra fecha</h2><p id="days"></p></div><button onclick="next()">Continuar</button></section>
+<section class="screen"><div class="card"><h2>💍 Cuenta atrás</h2><p id="boda"></p></div><button onclick="next()">Continuar</button></section>
+<section class="screen"><div class="card" id="letter"><h2>💌 Toca para abrir la carta</h2></div><button onclick="next()">Continuar</button></section>
+<section class="screen"><h1>¿Quieres seguir escribiendo esta historia conmigo?</h1><button onclick="finale()">❤️ Sí</button><button onclick="finale()">❤️ Siempre</button></section>
+
+<script>
+for(let i=0;i<180;i++){let d=document.createElement('div');d.style.left=Math.random()*100+'vw';d.style.top=Math.random()*100+'vh';document.getElementById('stars').appendChild(d)}
+let idx=0,s=[...document.querySelectorAll('.screen')];
+function next(){s[idx].classList.remove('active');idx++;s[idx].classList.add('active');document.getElementById('p').style.width=(idx/(s.length-1))*100+'%'}
+const start=new Date('2024-04-21');
+days.innerHTML='Han pasado '+Math.floor((Date.now()-start)/(86400000))+' días desde el comienzo de nuestra historia ❤️';
+const w=new Date('2026-08-21');
+boda.innerHTML='Faltan '+Math.ceil((w-Date.now())/86400000)+' días para nuestra boda 💍';
+letter.onclick=()=>letter.innerHTML='<h2>💌 Carta para Tatiana</h2><p>Volvería a elegir cada mirada, cada conversación y cada día contigo. Gracias por convertir una casualidad en un hogar. Te amo. — Daniel ❤️</p>';
+function finale(){
+document.body.innerHTML='<div style="height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center;background:linear-gradient(#101530,#6a4a88,#ff9fc6)"><h1>Tatiana ❤️ Daniel</h1><h2>Desde 21/04/2024 hasta siempre</h2></div>';
+}
+</script></body></html>
